@@ -1,22 +1,24 @@
 import logo from "./logo.svg";
 import "./App.css";
+import openai from './utilities/openai';
 
 function App() {
+	const test = async () => {
+		const chatCompletion = await openai.chat.completions.create({
+		messages: [{ role: 'user', content: 'Say this is a test' }],
+		model: 'gpt-3.5-turbo',
+		});
+	
+		alert(chatCompletion.choices);
+	}
+	
 	return (
 		<div className="App">
 			<header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
+				<button onClick={test}>
+					Test OpenAI
+				</button>
 			</header>
 		</div>
 	);
