@@ -28,6 +28,10 @@ export default function Home() {
     }
   };
   
+  const getTranscript = async () => {
+	const response = await axios.get(`/api/youtube-transcribe/${youtubeID}`);
+	console.log(response);
+  }
 
 	const testOpenAI = async () => {
     const response = await axios.get('/api/test-chat-completion');
@@ -37,6 +41,7 @@ export default function Home() {
 	return (
 		<div className="App">
 			<button onClick={testOpenAI}>Test OpenAI</button>
+			<button onClick={getTranscript}>Get Transcript</button>
 
 			<form onSubmit={getYoutubeID}>
 				<input type="text" value={id} onChange={onIdChange} />
