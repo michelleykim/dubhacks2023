@@ -14,9 +14,11 @@ You are an assistant who aids in providing context and additional information fo
 Your primary goal is to augment the user's understanding and enjoyment of the video or lecture with accurate, context-aware information.
 `;
 
-const LEADING_MESSAGE_KIDS = `Hey there, buddy! The words up above come from a video, and they show the time when someone said something. Can you help me answer the next question using what you read? If you find something important, let's write down the times like this: 1:23, 2:34, etc. So, if someone asks how we know, we can say, 'We found it at [1:23, 2:34] in the video! Also explain like I am five who doesn't know much. Don't use any vocabulatory that is too hard for me to understand.`;
+const GENERIC_PART = `The JSON object above contains a transcript from a video. Each object has a 'text' field for spoken content and a 'timestamp' field in seconds from the start of the video.`;
+const CONSTRAINT_PART = `Cite using timestamps in [minutes:seconds-minutes:seconds] format where [01:23-1:45] indicates that the sources are from 1 minute 23 seconds to 1 minute 45 seconds. All timestamps must be within the video length. For instance, if the last timestamp is '5:00', do not exceed it.`;
 
-const LEADING_MESSAGE = `The text above consists of a transcript from a video, where each line is annotated with a timestamp in seconds next to the spoken content. Please answer the following question based on this transcript. If your answer references any part of the transcript, include those timestamps in a readable format like 1:23, 2:34, etc. at the end of your answer. Example format: 'Refer to [1:23, 2:34] for the source of this information.`;
+const LEADING_MESSAGE = `${GENERIC_PART} ${CONSTRAINT_PART}`;
+const LEADING_MESSAGE_KIDS = `${LEADING_MESSAGE} Also explain like I am five who doesn't know much. Don't use any vocabulatory that is too hard for me to understand.`;
 
 export default async function handler(req, res) {
   const { transcript, question, isKidsMode } = req.body;

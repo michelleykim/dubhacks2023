@@ -1,21 +1,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useMainContext } from "../contexts/MainContext";
 
 const Answer = ({ answer }) => {
-	const [darkmode, setDarkmode] = useState(true);
-	const searchParams = useSearchParams();
-
-	useEffect(() => {
-		if (searchParams.has("darkmode")) {
-			if (searchParams.get("darkmode") === "true") {
-				setDarkmode(true);
-			} else {
-				setDarkmode(false);
-			}
-		}
-	}, [searchParams]);
+	const { state } = useMainContext();
 
 	return (
 		<div className="flex flex-row bg-[#ECECF1] dark:bg-[#444654] items-start justify-start w-full p-3 rounded-b-md">
@@ -24,7 +14,7 @@ const Answer = ({ answer }) => {
 				alt="user icon"
 				className="w-10 h-10 mr-2"
 			/>
-			{darkmode ? (
+			{state.darkmode ? (
 				<p className="text-white text-sm pl-2">{answer}</p>
 			) : (
 				<p className="text-black text-sm pl-2">{answer}</p>
