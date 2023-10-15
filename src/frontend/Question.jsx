@@ -5,18 +5,25 @@ import { useState, useEffect } from "react";
 
 const Question = ({ question, isOpen }) => {
 	const [rotateclass, setRotateclass] = useState("rotate-0");
+	const [roundedclass, setRoundedclass] = useState(
+		"flex flex-row bg-grey items-center justify-start w-full p-3 rounded-t-lg"
+	);
 
 	useEffect(() => {
 		if (!isOpen) {
 			setRotateclass("transform rotate-90");
+			setRoundedclass(
+				"flex flex-row bg-grey items-center justify-start w-full p-3 rounded-lg"
+			);
 		} else {
 			setRotateclass("transform rotate-0");
+			setRoundedclass(
+				"flex flex-row bg-grey items-center justify-start w-full p-3 rounded-t-lg"
+			);
 		}
 	}, [isOpen]);
 	return (
-		<div
-			className={`flex flex-row bg-grey items-center justify-start w-full p-3 rounded-t-lg`}
-		>
+		<div className={roundedclass}>
 			<img
 				src={"/assets/userIcon.svg"}
 				alt="user icon"
