@@ -52,7 +52,6 @@ export default function Home() {
 			console.error("Error fetching transcript:", error.message);
 			dispatch({ type: "error", payload: error.message });
 		}
-		console.log(state);
 	};
 
 	const testOpenAI = async () => {
@@ -488,7 +487,7 @@ export default function Home() {
 	return (
 		<div className={`App w-screen h-screen dark overflow-hidden`}>
 			<div
-				className="px-[2.5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
+				className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
 				id="main-content"
 			>
 				<MainContext.Provider value={{ state, dispatch }}>

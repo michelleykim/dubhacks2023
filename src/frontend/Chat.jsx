@@ -19,7 +19,7 @@ const Chat = () => {
 
 	return (
 		<Frame>
-			<div className="max-h-[70vh] overflow-y-auto">
+			<div className="max-h-[70vh] min-h-[70vh] overflow-y-auto">
 				{hasQna ? (
 					state?.qna?.map((item, index) => {
 						return <QnA key={index} item={item} />;

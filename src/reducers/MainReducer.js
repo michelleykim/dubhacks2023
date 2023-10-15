@@ -8,30 +8,6 @@ const initialState = {
 			question: "What is the meaning of food?",
 			answer: "to be eaten and enjoyed",
 		},
-		{
-			question: "What is the meaning of life?",
-			answer: "42",
-		},
-		{
-			question: "What is the meaning of food?",
-			answer: "to be eaten and enjoyed",
-		},
-		{
-			question: "What is the meaning of life?",
-			answer: "42",
-		},
-		{
-			question: "What is the meaning of food?",
-			answer: "to be eaten and enjoyed",
-		},
-		{
-			question: "What is the meaning of life?",
-			answer: "42",
-		},
-		{
-			question: "What is the meaning of food?",
-			answer: "to be eaten and enjoyed",
-		},
 	],
 	currentQuestion: "",
 	transcript: [],
