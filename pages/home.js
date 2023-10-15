@@ -18,7 +18,23 @@ export default function Home() {
 	const [youtubeID, setYoutubeID] = useState("");
 	const [openModal, setopenModal] = useState(false);
 	const [confirmed, setConfirmed] = useState("");
+	const [darkmode, setDarkmode] = useState(false);
+	const [darkmodeclass, setDarkmodeclass] = useState("");
 	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		debugger;
+		if (searchParams.has("darkmode")) {
+			if (searchParams.get("darkmode") == "true") {
+				console.log("HIT!");
+				setDarkmode(true);
+				setDarkmodeclass("App w-screen h-screen static dark overflow-hidden");
+			} else {
+				setDarkmode(false);
+				setDarkmodeclass("App w-screen h-screen static overflow-hidden");
+			}
+		}
+	}, [searchParams]);
 
 	useEffect(() => {
 		getTranscript();
@@ -26,7 +42,7 @@ export default function Home() {
 
 	useEffect(() => {
 		if (confirmed == "yes") {
-			router.push(`/home?link=${id}`);
+			router.push(`/home?link=${id}?darkmode=${darkmode}`);
 		}
 		setopenModal(false);
 		setConfirmed("");
@@ -77,9 +93,9 @@ export default function Home() {
 
 	return (
 		<>
-			<div className={`App w-screen h-screen static dark overflow-hidden`}>
+			<div className={darkmodeclass}>
 				<div
-					className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-dark-grey"
+					className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-[#F6FCFC] dark:bg-dark-grey"
 					id="main-content"
 				>
 					<MainContext.Provider value={{ state, dispatch }}>
@@ -87,9 +103,6 @@ export default function Home() {
 							className="basis-1/2 flex flex-col ml-10 mr-5 z-10"
 							id="left-panel"
 						>
-							{/* <button onClick={testOpenAI}>Test OpenAI</button>
-						<button onClick={getTranscript}>Get Transcript</button> */}
-
 							<LinkInput
 								value={id}
 								onChange={onIdChange}
@@ -111,7 +124,18 @@ export default function Home() {
 					</MainContext.Provider>
 				</div>
 			</div>
-			<img className="absolute bottom-0 z-0" src="assets/background.png"></img>
+			{darkmode ? (
+				<img
+					className="absolute bottom-0 z-0"
+					src="assets/background.png"
+				></img>
+			) : (
+				<img
+					className="absolute bottom-0 z-0"
+					src="assets/background-l.png"
+				></img>
+			)}
+
 			{openModal && <Modal onClick={setConfirmed} />}
 		</>
 	);

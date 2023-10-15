@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useReducer } from "react";
 import LandingLinkInput from "../src/frontend/LandingLinkInput";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -6,6 +6,23 @@ import { useState } from "react";
 const Landing = () => {
 	const router = useRouter();
 	const [link, setLink] = useState("");
+	const [darkmode, setDarkmode] = useState(true);
+	const [toggleclass, setToggleclass] = useState(
+		"relative w-6 h-6 top-1 left-px bg-white rounded-full shadow-md toggle-checkbox cursor-pointer"
+	);
+	const [textclass, setTextclass] = useState("");
+
+	useEffect(() => {
+		if (darkmode) {
+			setToggleclass(
+				"relative w-6 h-6 top-1 bg-white rounded-full shadow-md toggle-checkbox cursor-pointer -translate-x-0.5 transition duration-300"
+			);
+		} else {
+			setToggleclass(
+				"relative w-6 h-6 top-1 bg-white rounded-full shadow-md toggle-checkbox cursor-pointer translate-x-0.5 transition duration-300"
+			);
+		}
+	}, [darkmode]);
 
 	const onChange = (e) => {
 		setLink(e.target.value);
@@ -13,7 +30,8 @@ const Landing = () => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		router.push(`/home?link=${link}`);
+
+		router.push(`/home?link=${link}&darkmode=${darkmode}`);
 	};
 
 	return (
@@ -54,6 +72,36 @@ const Landing = () => {
 				className="absolute bottom-0 z-0 w-full h-full"
 				src="assets/landingBackground.png"
 			></img>
+			<div className="absolute flex flex-row items-center top-16 right-8">
+				{darkmode ? (
+					<div
+						className={
+							"w-16 h-8 flex flex-row justify-between pl-1 pr-3 bg-gray-300 rounded-full bg-gradient-to-r from-teal-700 to-teal-950 text-emerald-200"
+						}
+						onClick={() => setDarkmode(!darkmode)}
+					>
+						<button className={toggleclass} />
+						<span className="self-center">{darkmode ? "off" : "on"}</span>
+					</div>
+				) : (
+					<div
+						className={
+							"w-16 h-8 flex flex-row justify-between pl-3 pr-1 bg-gray-300 rounded-full bg-gradient-to-r from-teal-700 to-teal-950 text-emerald-200"
+						}
+						onClick={() => setDarkmode(!darkmode)}
+					>
+						<span className="self-center">{darkmode ? "off" : "on"}</span>
+						<button className={toggleclass} />
+					</div>
+				)}
+
+				<label
+					for="toggle"
+					class="toggle-label text-emerald-200 text-base pl-2"
+				>
+					kids mode
+				</label>
+			</div>
 		</div>
 	);
 };
