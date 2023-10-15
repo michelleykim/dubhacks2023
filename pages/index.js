@@ -12,6 +12,7 @@ export default function Home() {
 
 	const [youtubeID, setYoutubeID] = useState("");
 	const [id, setId] = useState("");
+
 	const onIdChange = (e) => {
 		setId(e.target.value);
 	};
@@ -36,8 +37,17 @@ export default function Home() {
 	};
 
 	const getTranscript = async () => {
-		const response = await axios.get(`/api/youtube-transcribe/${youtubeID}`);
-		console.log(response);
+		try {
+			const response = await axios.get(`/api/youtube-transcribe/${youtubeID}`);
+			dispatch({
+				type: "get_transcript",
+				payload: response.data.transcript,
+			});
+		} catch (error) {
+			console.error("Error fetching transcript:", error.message);
+			dispatch({ type: "error", payload: error.message });
+		}
+		console.log(state);
 	};
 
 	const testOpenAI = async () => {
