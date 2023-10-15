@@ -8,10 +8,6 @@ import Accordion from "./Accordion";
 const Transcript = () => {
 	const { state, dispatch } = useContext(MainContext);
 
-	useEffect(() => {
-		console.log(state.transcript);
-	}, [state.transcript]);
-
 	return (
 		<div className="">
 			<Accordion heading={"Video Transcript"}>
