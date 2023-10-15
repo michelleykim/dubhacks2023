@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, createContext, useReducer } from "react";
+import { useState, createContext, useReducer, useEffect } from "react";
 import YouTubeEmbed from "../src/frontend/YouTubeEmbed";
 import LinkInput from "../src/frontend/LinkInput";
 import Transcript from "../src/frontend/Transcript";
@@ -13,6 +13,10 @@ export default function Home() {
 
 	const [youtubeID, setYoutubeID] = useState("");
 	const [id, setId] = useState("");
+
+	useEffect(() => {
+		getTranscript();
+	}, [youtubeID]);
 
 	const onIdChange = (e) => {
 		setId(e.target.value);
@@ -53,7 +57,7 @@ export default function Home() {
 
 	const testOpenAI = async () => {
 		const response = await axios.post("/api/chat-completion", {
-				transcript: `[
+			transcript: `[
 					{
 						"text": "fortran a compiled imperative",
 						"duration": 3919,
@@ -470,27 +474,27 @@ export default function Home() {
 						"offset": 157599
 					}
 				]`,
-				question: "Why would someone prefer fortran over cobol?",
+			question: "Why would someone prefer fortran over cobol?",
 		});
 		const { chatCompletion } = response.data;
 		const { choices } = chatCompletion;
 		const { text } = choices[0];
 		dispatch("add_qna", {
-			question: 'test',
+			question: "test",
 			answer: text,
-		})
+		});
 	};
 
 	return (
 		<div className={`App w-screen h-screen dark overflow-hidden`}>
 			<div
-				className="w-full h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
+				className="px-[2.5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
 				id="main-content"
 			>
 				<MainContext.Provider value={{ state, dispatch }}>
 					<div className="basis-1/2 flex flex-col ml-10 mr-5" id="left-panel">
-						<button onClick={testOpenAI}>Test OpenAI</button>
-						<button onClick={getTranscript}>Get Transcript</button>
+						{/* <button onClick={testOpenAI}>Test OpenAI</button>
+						<button onClick={getTranscript}>Get Transcript</button> */}
 
 						<LinkInput
 							value={id}
