@@ -12,18 +12,19 @@ const PromptInput = () => {
 		console.log("regenerate");
 	};
 
-	const send = async (e) => {
-		e.preventDefault();
-		setLoading(true);
-		const response = await axios.post("/api/chat-completion", {
-			transcript: JSON.stringify(state.transcript),
-			question: state.currentQuestion,
-		});
-		setLoading(false);
-		const { data } = response;
-		const { chatCompletion } = data;
-		const { choices } = chatCompletion;
-		const { message } = choices[0];
+  const send = async (e) => {
+	e.preventDefault();
+    setLoading(true);
+    const response = await axios.post("/api/chat-completion", {
+      transcript: JSON.stringify(state.transcript),
+      question: state.currentQuestion,
+	  isKidsMode: !state.darkmode,
+    });
+    setLoading(false);
+    const { data } = response;
+    const { chatCompletion } = data;
+    const { choices } = chatCompletion;
+    const { message } = choices[0];
 
 		dispatch({
 			type: "add_qna",

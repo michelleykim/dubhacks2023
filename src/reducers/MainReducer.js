@@ -8,10 +8,10 @@ const initialState = {
 
 const MainReducer = (state, action) => {
 	switch (action.type) {
-		case "toggle_darkmode": {
+		case "set_darkmode": {
 			return {
 				...state,
-				darkmode: !state.darkmode,
+				darkmode: action.payload,
 			};
 		}
 		case "add_qna": {

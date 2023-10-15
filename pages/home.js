@@ -25,9 +25,11 @@ export default function Home() {
 	useEffect(() => {
 		if (searchParams.has("darkmode")) {
 			if (searchParams.get("darkmode") === "true") {
+				dispatch({ type: "set_darkmode", payload: true});
 				setDarkmode(true);
 				setDarkmodeclass("App w-screen h-screen static dark overflow-hidden");
 			} else {
+				dispatch({ type: "set_darkmode", payload: false });
 				setDarkmode(false);
 				setDarkmodeclass("App w-screen h-screen static overflow-hidden");
 			}
