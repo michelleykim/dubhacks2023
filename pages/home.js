@@ -23,9 +23,8 @@ export default function Home() {
 	const searchParams = useSearchParams();
 
 	useEffect(() => {
-		debugger;
 		if (searchParams.has("darkmode")) {
-			if (searchParams.get("darkmode") == "true") {
+			if (searchParams.get("darkmode") === "true") {
 				console.log("HIT!");
 				setDarkmode(true);
 				setDarkmodeclass("App w-screen h-screen static dark overflow-hidden");
