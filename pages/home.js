@@ -25,7 +25,6 @@ export default function Home() {
 	useEffect(() => {
 		if (searchParams.has("darkmode")) {
 			if (searchParams.get("darkmode") === "true") {
-				console.log("HIT!");
 				setDarkmode(true);
 				setDarkmodeclass("App w-screen h-screen static dark overflow-hidden");
 			} else {
@@ -94,7 +93,7 @@ export default function Home() {
 		<>
 			<div className={darkmodeclass}>
 				<div
-					className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-[#F6FCFC] dark:bg-dark-grey"
+					className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-light dark:bg-dark-grey"
 					id="main-content"
 				>
 					<MainContext.Provider value={{ state, dispatch }}>

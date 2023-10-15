@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 import { useState } from "react";
 
@@ -9,24 +10,36 @@ const Accordion = ({ heading, children }) => {
 	const [roundedclass, setRoundedclass] = useState(
 		"w-full flex dark:bg-zinc-800 p-5 rounded-t-xl font-semibold text-lg"
 	);
+	const [darkmodeclass, setDarkmodeclass] = useState("");
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		if (searchParams.has("darkmode")) {
+			if (searchParams.get("darkmode") === "true") {
+				setDarkmodeclass("w-full dark");
+			} else {
+				setDarkmodeclass("w-full shadow-xl");
+			}
+		}
+	}, [searchParams]);
 
 	useEffect(() => {
 		if (!open) {
 			setRotateclass("w-5 h-5 ml-auto transform rotate-90");
 			setRoundedclass(
-				"w-full flex dark:bg-zinc-800 p-5 rounded-xl font-semibold text-lg"
+				"w-full flex bg-white dark:bg-zinc-800 p-5 rounded-xl font-semibold text-lg border-[#ECECF1] border-solid border-1 dark:border-0"
 			);
 		} else {
 			setRotateclass("w-5 h-5 ml-auto transform rotate-0");
 			setRoundedclass(
-				"w-full flex dark:bg-zinc-800 p-5 rounded-t-xl font-semibold text-lg"
+				"w-full flex bg-white dark:bg-zinc-800 p-5 rounded-t-xl font-semibold text-lg border-[#ECECF1] border-solid border-2 dark:border-0 "
 			);
 		}
 	}, [open]);
 
 	return (
 		<div
-			className="w-full"
+			className={darkmodeclass}
 			onClick={() => {
 				setOpen(!open);
 			}}
@@ -43,7 +56,7 @@ const Accordion = ({ heading, children }) => {
 			{open && (
 				<div
 					className={
-						"w-full flex dark:bg-light-grey p-5 overflow-hidden rounded-bl-xl rounded-br-xl"
+						"w-full flex bg-white dark:bg-light-grey p-5 overflow-hidden rounded-bl-xl rounded-br-xl"
 					}
 				>
 					<div className={"text-black dark:text-white text-sm"}>{children}</div>

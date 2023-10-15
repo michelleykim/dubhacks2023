@@ -17,7 +17,7 @@ const LinkInput = ({ value, onChange, handleSubmit }) => {
 				</h1>
 				<div className="flex flex-row justify-between">
 					<input
-						className="w-11/12 my-1 dark:bg-light-grey p-4 rounded-md text-zinc-300 text-sm"
+						className="w-11/12 my-1 bg-[#ECECF1] dark:bg-light-grey p-4 rounded-md dark:text-zinc-300 text-sm"
 						type="text"
 						value={value}
 						onChange={onChange}

@@ -5,10 +5,23 @@ import { useState, useEffect } from "react";
 import Frame from "./Frame.jsx";
 import QnA from "./QnA.jsx";
 import { useMainContext } from "../contexts/MainContext.js";
+import { useSearchParams } from "next/navigation.js";
 
 const Chat = () => {
 	const { state } = useMainContext();
 	const [hasQna, setHasQna] = useState(false);
+	const [darkmode, setDarkmode] = useState(true);
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		if (searchParams.has("darkmode")) {
+			if (searchParams.get("darkmode") === "true") {
+				setDarkmode(true);
+			} else {
+				setDarkmode(false);
+			}
+		}
+	}, [searchParams]);
 
 	useEffect(() => {
 		console.log(state.qna);
@@ -27,11 +40,11 @@ const Chat = () => {
 				) : (
 					<div className="w-full h-full flex flex-col items-center justify-center py-16">
 						<img
-							src="/assets/logo.svg"
+							src={darkmode ? "/assets/birb.svg" : "/assets/borb.svg"}
 							alt="logo icon"
-							className="w-16 h-16 mr-1 mt-1 mb-10"
+							className="w-44 mr-1 mt-1 mb-10"
 						></img>
-						<div className="w-11/12 flex flex-col bg-gradient-to-r from-teal-300 to-emerald-600 mx-24 my-30 items-center rounded-xl py-10">
+						<div className="w-10/12 flex flex-col bg-gradient-to-r from-teal-300 to-emerald-400 mx-24 my-30 items-center rounded-xl py-10 text-sm text-white">
 							<div className="flex flex-row">
 								<img
 									src="/assets/locationIcon.svg"
