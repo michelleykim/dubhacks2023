@@ -485,34 +485,40 @@ export default function Home() {
 	};
 
 	return (
-		<div className={`App w-screen h-screen dark overflow-hidden`}>
-			<div
-				className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
-				id="main-content"
-			>
-				<MainContext.Provider value={{ state, dispatch }}>
-					<div className="basis-1/2 flex flex-col ml-10 mr-5" id="left-panel">
-						{/* <button onClick={testOpenAI}>Test OpenAI</button>
+		<>
+			<div className={`App w-screen h-screen static dark overflow-hidden`}>
+				<div
+					className="px-[5vw] h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-dark-grey"
+					id="main-content"
+				>
+					<MainContext.Provider value={{ state, dispatch }}>
+						<div
+							className="basis-1/2 flex flex-col ml-10 mr-5 z-10"
+							id="left-panel"
+						>
+							{/* <button onClick={testOpenAI}>Test OpenAI</button>
 						<button onClick={getTranscript}>Get Transcript</button> */}
 
-						<LinkInput
-							value={id}
-							onChange={onIdChange}
-							getYoutubeID={getYoutubeID}
-						/>
+							<LinkInput
+								value={id}
+								onChange={onIdChange}
+								getYoutubeID={getYoutubeID}
+							/>
 
-						<br />
-						<YouTubeEmbed youtubeID={youtubeID} />
-						<br />
-						<Transcript />
-					</div>
-					<div className="basis-1/2 mr-10 ml-5" id="right-panel">
-						<Chat />
-						<br />
-						<PromptInput />
-					</div>
-				</MainContext.Provider>
+							<br />
+							<YouTubeEmbed youtubeID={youtubeID} />
+							<br />
+							<Transcript />
+						</div>
+						<div className="basis-1/2 mr-10 ml-5 z-10" id="right-panel">
+							<Chat />
+							<br />
+							<PromptInput />
+						</div>
+					</MainContext.Provider>
+				</div>
 			</div>
-		</div>
+			<img className="absolute bottom-0 z-0" src="assets/background.png"></img>
+		</>
 	);
 }
