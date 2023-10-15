@@ -57,8 +57,8 @@ export default function Home() {
 						<button onClick={getTranscript}>Get Transcript</button>
 
 						<LinkInput
-							id={id}
-							onIdChange={onIdChange}
+							value={id}
+							onChange={onIdChange}
 							getYoutubeID={getYoutubeID}
 						/>
 
