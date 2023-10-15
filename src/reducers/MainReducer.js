@@ -9,6 +9,7 @@ const initialState = {
 			answer: "to be eaten and enjoyed",
 		},
 	],
+	currentQuestion: "",
 	transcript: [],
 };
 
@@ -24,6 +25,12 @@ const MainReducer = (state, action) => {
 			return {
 				...state,
 				transcript: action.payload,
+			};
+		}
+		case "set_current_question": {
+			return {
+				...state,
+				currentQuestion: action.payload,
 			};
 		}
 		default: {

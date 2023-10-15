@@ -2,14 +2,27 @@
 
 import React from "react";
 import Frame from "./Frame.jsx";
+import { useMainContext } from "../contexts/MainContext.js";
+import axios from "axios";
 
 const PromptInput = () => {
+  const { state, dispatch } = useMainContext();
   const regenerate = () => {
     console.log("regenerate");
   }
 
-  const send = () => {
-    console.log("send");
+  const send = async () => {
+    const response = await axios.post("/api/chat-completion", {
+      transcript: JSON.stringify(state.transcript),
+      question: state.currentQuestion,
+    })
+    const { data } = response;
+    const { chatCompletion } = data;
+    const { choices } = chatCompletion;
+    const { message } = choices[0];
+
+    dispatch({ type: "add_qna", payload: { question: state.currentQuestion, answer: message.content } });
+    dispatch({ type: "set_current_question", payload: "" });
   }
 
   return (
@@ -25,6 +38,10 @@ const PromptInput = () => {
             type="text"
             className="text-white text-sm pl-2 bg-transparent outline-none w-full"
             placeholder="Type your question here..."
+            value={state.currentQuestion}
+            onChange={(e) =>
+              dispatch({ type: "set_current_question", payload: e.target.value })
+            }
           />
           <img
             src={"/assets/iconSend.svg"}
