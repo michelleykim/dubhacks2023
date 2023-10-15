@@ -80,7 +80,7 @@ const Landing = () => {
 							className="absolute top-[30%] left-[20%] w-[7vw] h-[7vw] object-contain"
 							alt="bird"
 						/>
-						<span className="absolute top-[17%] left-[31%] px-3 py-2 bg-gradient-to-r from-teal-300 to-emerald-400 text-white text-xl rounded-lg">
+						<span className="absolute top-[17%] left-[31%] px-3 py-2 bg-gradient-to-r from-teal-300 to-emerald-400 text-white text-xl rounded-lg z-30">
 							for kids
 						</span>
 					</>
