@@ -1,13 +1,23 @@
 "use client";
 
-import React from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useState, useEffect } from "react";
 
 const Frame = ({ children }) => {
-	return (
-		<div className="dark:bg-zinc-800 p-5 rounded-xl drop-shadow-lg">
-			{children}
-		</div>
-	);
+	const [darkmodeclass, setDarkmodeclass] = useState("");
+	const searchParams = useSearchParams();
+
+	useEffect(() => {
+		if (searchParams.has("darkmode")) {
+			if (searchParams.get("darkmode") === "true") {
+				setDarkmodeclass("bg-zinc-800 p-5 rounded-xl drop-shadow-lg");
+			} else {
+				setDarkmodeclass("bg-white p-5 rounded-xl drop-shadow-lg");
+			}
+		}
+	}, [searchParams]);
+
+	return <div className={darkmodeclass}>{children}</div>;
 };
 
 export default Frame;
