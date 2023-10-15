@@ -1,14 +1,17 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, createContext, useReducer } from "react";
 import YouTubeEmbed from "../src/frontend/YouTubeEmbed";
 import LinkInput from "../src/frontend/LinkInput";
-import Chat from "../src/frontend/chat";
 import Transcript from "../src/frontend/Transcript";
+import Chat from "../src/frontend/Chat";
+import { MainReducer, initialState } from "../src/reducers/MainReducer";
+import { MainContext } from "../src/contexts/MainContext";
 
 export default function Home() {
+	const [state, dispatch] = useReducer(MainReducer, initialState);
+
 	const [youtubeID, setYoutubeID] = useState("");
 	const [id, setId] = useState("");
-
 	const onIdChange = (e) => {
 		setId(e.target.value);
 	};
@@ -43,29 +46,31 @@ export default function Home() {
 	};
 
 	return (
-		<div className={`App w-screen h-screen dark overflow-hidden`}>
+		<div className={`App w-screen h-screen dark  overflow-hidden`}>
 			<div
 				className="w-full h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
 				id="main-content"
 			>
-				<div className="basis-1/2 flex flex-col m-10" id="left-panel">
-					<LinkInput
-						id={id}
-						onIdChange={onIdChange}
-						getYoutubeID={getYoutubeID}
-					/>
+				<MainContext.Provider value={{ state, dispatch }}>
+					<div className="basis-1/2 flex flex-col ml-10 mr-5" id="left-panel">
+						<button onClick={testOpenAI}>Test OpenAI</button>
+						<button onClick={getTranscript}>Get Transcript</button>
 
-					<br />
-					<YouTubeEmbed youtubeID={youtubeID} />
+						<LinkInput
+							id={id}
+							onIdChange={onIdChange}
+							getYoutubeID={getYoutubeID}
+						/>
 
-					<br />
-					<Transcript />
-				</div>
-				<div className="basis-1/2 flex flex-col m-10" id="right-panel">
-					<button onClick={testOpenAI}>Test OpenAI</button>
-					<button onClick={getTranscript}>Get Transcript</button>
-					<Chat />
-				</div>
+						<br />
+						<YouTubeEmbed youtubeID={youtubeID} />
+						<br />
+						<Transcript />
+					</div>
+					<div className="basis-1/2 mr-10 ml-5" id="right-panel">
+						<Chat />
+					</div>
+				</MainContext.Provider>
 			</div>
 		</div>
 	);

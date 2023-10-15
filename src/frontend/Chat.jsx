@@ -2,26 +2,20 @@
 
 import React from "react";
 import Frame from "./Frame.jsx";
+import QnA from "./QnA.jsx";
+import { useMainContext } from "../contexts/MainContext.js";
 
-const examples = [
-    {
-        "prompt": "What is the meaning of life?",
-        "response": "42"
-    },
-    {
-        "prompt": "What is the meaning of food?",
-        "response": "to be eaten and enjoyed"
-    }
-]
 
 const Chat = () => {
-    const [qna, setQna] = React.useState(examples);
+  const { state } = useMainContext();
 
-    return (
-        <Frame>
-            <h1>Chat</h1>
-        </Frame>
-    )
-}
+  return (
+    <Frame>
+      {state?.qna.map((item, index) => {
+        return <QnA key={index} item={item} />;
+      })}
+    </Frame>
+  );
+};
 
 export default Chat;
