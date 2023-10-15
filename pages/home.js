@@ -8,21 +8,33 @@ import { MainReducer, initialState } from "../src/reducers/MainReducer";
 import { MainContext } from "../src/contexts/MainContext";
 import PromptInput from "../src/frontend/PromptInput";
 import { useSearchParams } from "next/navigation";
+import Modal from "../src/frontend/Modal";
+import { useRouter } from "next/router";
 
 export default function Home() {
+	const router = useRouter();
 	const [state, dispatch] = useReducer(MainReducer, initialState);
 	const [id, setId] = useState("");
 	const [youtubeID, setYoutubeID] = useState("");
-	const searchParams = useSearchParams()
+	const [openModal, setopenModal] = useState(false);
+	const [confirmed, setConfirmed] = useState("");
+	const searchParams = useSearchParams();
 
 	useEffect(() => {
 		getTranscript();
 	}, [youtubeID]);
 
+	useEffect(() => {
+		if (confirmed == "yes") {
+			router.push(`/home?link=${id}`);
+		}
+		setopenModal(false);
+		setConfirmed("");
+	}, [confirmed]);
 
 	const onIdChange = (e) => {
 		setId(e.target.value);
-	}
+	};
 
 	const parseYoutubeID = (url) => {
 		if (url.includes("youtu.be")) {
@@ -30,30 +42,25 @@ export default function Home() {
 		}
 		const urlParams = new URLSearchParams(new URL(url).search);
 		return urlParams.get("v");
-	}
+	};
 
-
-	const getYoutubeID = (e) => {
-		e.preventDefault();
-
+	const getYoutubeID = () => {
 		const videoID = parseYoutubeID(id);
-	  
+
 		if (videoID) {
-		  setYoutubeID(videoID);
-		  setId("");
+			setYoutubeID(videoID);
 		} else {
-		  console.error("Invalid YouTube URL");
+			console.error("Invalid YouTube URL");
 		}
-	  };
-	  
-	  useEffect(() => {
+	};
+
+	useEffect(() => {
 		if (searchParams.has("link")) {
-		  const link = searchParams.get("link");
-		  setYoutubeID(parseYoutubeID(link));
-		  setId("");
+			const link = searchParams.get("link");
+			setYoutubeID(parseYoutubeID(link));
+			setId("");
 		}
-	  }, [searchParams]);
-	  
+	}, [searchParams]);
 
 	const getTranscript = async () => {
 		try {
@@ -86,7 +93,9 @@ export default function Home() {
 							<LinkInput
 								value={id}
 								onChange={onIdChange}
-								onSubmit={getYoutubeID}
+								handleSubmit={() => {
+									setopenModal(true);
+								}}
 							/>
 
 							<br />
@@ -103,6 +112,7 @@ export default function Home() {
 				</div>
 			</div>
 			<img className="absolute bottom-0 z-0" src="assets/background.png"></img>
+			{openModal && <Modal onClick={setConfirmed} />}
 		</>
 	);
 }
