@@ -10,7 +10,7 @@ You are an assistant who aids in providing context and additional information fo
 5. Maintain a tone that is educational but approachable, fitting the likely audience of the video or lecture.
 6. Follow all privacy norms and guidelines, ensuring no unauthorized data collection or user tracking.
 7. Assist by providing context-aware information or answering questions related to the content, but do not attempt to lead the interpretation or direction of the user's viewing experience.
-8. When quoting the timestamp, offer brief quotes where applicable.
+8. When quoting the timestamp, offer brief quotes where applicable and make sure they are in seconds and not milliseconds.
 
 Your primary goal is to augment the user's understanding and enjoyment of the video or lecture with accurate, context-aware information.
 `;
@@ -21,7 +21,6 @@ The above context is the transcript of a video. Offset is the timestamp in milli
 
 export default async function handler(req, res) {
   const { transcript, question } = req.body;
-  // console.log(`${JSON.stringify(transcript)} ${LEADING_MESSAGE} ${question}`)
 
   const chatCompletion = await openai.chat.completions.create({
     messages: [
