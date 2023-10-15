@@ -1,4 +1,5 @@
 const initialState = {
+	darkmode: true,
 	qna: [
 	],
 	currentQuestion: "",
@@ -7,6 +8,12 @@ const initialState = {
 
 const MainReducer = (state, action) => {
 	switch (action.type) {
+		case "toggle_darkmode": {
+			return {
+				...state,
+				darkmode: !state.darkmode,
+			};
+		}
 		case "add_qna": {
 			return {
 				...state,
