@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
-import Frame from "../src/frontend/Frame";
 import YouTubeEmbed from "../src/frontend/YouTubeEmbed";
 import LinkInput from "../src/frontend/LinkInput";
+import Chat from "../src/frontend/Chat";
 
 export default function Home() {
   const [youtubeID, setYoutubeID] = useState("");
@@ -61,7 +61,7 @@ export default function Home() {
           <YouTubeEmbed youtubeID={youtubeID} />
         </div>
         <div className="basis-1/2" id="right-panel">
-          <h1>CHAT HISTORY HERE</h1>
+			<Chat />
         </div>
       </div>
     </div>
