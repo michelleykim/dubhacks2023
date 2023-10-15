@@ -3,6 +3,7 @@ import { useState, createContext, useReducer } from "react";
 import YouTubeEmbed from "../src/frontend/YouTubeEmbed";
 import LinkInput from "../src/frontend/LinkInput";
 import Transcript from "../src/frontend/Transcript";
+import Chat from "../src/frontend/Chat";
 import { MainReducer, initialState } from "../src/reducers/MainReducer";
 import { MainContext } from "../src/contexts/MainContext";
 
@@ -63,6 +64,7 @@ export default function Home() {
 
             <br />
             <YouTubeEmbed youtubeID={youtubeID} />
+            <br />
 					  <Transcript />
           </div>
           <div className="basis-1/2 mr-10 ml-5" id="right-panel">
