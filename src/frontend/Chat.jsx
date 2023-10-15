@@ -44,14 +44,16 @@ const Chat = () => {
 							alt="logo icon"
 							className="w-44 mr-1 mt-1 mb-10"
 						></img>
-						<div className="w-10/12 flex flex-col bg-gradient-to-r from-teal-300 to-emerald-400 mx-24 my-30 items-center rounded-xl py-10 text-sm text-white">
+						<div className="w-10/12 flex flex-col bg-gradient-to-r from-teal-600 to-emerald-600 mx-24 my-30 items-center rounded-xl py-10 text-lg text-white">
 							<div className="flex flex-row">
 								<img
 									src="/assets/locationIcon.svg"
 									alt="location icon"
 									className="w-5 h-5 mr-1 mt-1"
 								></img>
-								<span>ask a question</span>
+								<span>
+									{darkmode ? "ask a question" : "what are you curious about?"}
+								</span>
 							</div>
 							<div className="flex flex-row mt-1">
 								<img
@@ -59,7 +61,11 @@ const Chat = () => {
 									alt="lightening icon"
 									className="w-5 h-5 mr-1 mt-1"
 								></img>
-								<span>test your understanding</span>
+								<span>
+									{darkmode
+										? "test your understanding"
+										: "what have you learned?"}
+								</span>
 							</div>
 							<div className="flex flex-row mt-1">
 								<img
@@ -67,7 +73,11 @@ const Chat = () => {
 									alt="book icon"
 									className="w-5 h-5 mr-1 mt-1"
 								></img>
-								<span>reflect on key concepts</span>
+								<span>
+									{darkmode
+										? "reflect on key concepts"
+										: "what do you find confusing?"}
+								</span>
 							</div>
 							<div className="flex flex-row mt-1">
 								<img
@@ -75,7 +85,11 @@ const Chat = () => {
 									alt="lightbulb icon"
 									className="w-5 h-5 mr-1 mt-1"
 								></img>
-								<span>apply your understanding</span>
+								<span>
+									{darkmode
+										? "apply your understanding"
+										: "what are you thinking about?"}
+								</span>
 							</div>
 						</div>
 					</div>
