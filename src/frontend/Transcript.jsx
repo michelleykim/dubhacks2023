@@ -15,7 +15,7 @@ const Transcript = () => {
 	return (
 		<div className="">
 			<Accordion heading={"Video Transcript"}>
-				<div className="max-h-28 overflow-x-hidden">
+				<div className="max-h-20 overflow-x-hidden">
 					{state?.transcript?.map((item, index) => {
 						return (
 							<span className="" key={index}>
