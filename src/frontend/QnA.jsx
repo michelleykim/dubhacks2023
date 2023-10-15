@@ -8,9 +8,9 @@ const QnA = ({ item }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className="p-5">
+    <div className="p-2">
       <div className="w-full" onClick={() => setOpen(!open)}>
-        <Question question={item?.question} />
+        <Question question={item?.question} isOpen={open} />
       </div>
       {open && (
         <div className="w-full">
