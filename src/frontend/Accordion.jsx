@@ -22,9 +22,7 @@ const Accordion = ({ heading, children }) => {
 						"w-full flex dark:bg-grey p-5 overflow-hidden rounded-bl-xl rounded-br-xl"
 					}
 				>
-					<p className={"overflow-scroll text-black dark:text-white text-sm"}>
-						{children}
-					</p>
+					<div className={"text-black dark:text-white text-sm"}>{children}</div>
 				</div>
 			)}
 		</div>
