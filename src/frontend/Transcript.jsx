@@ -6,7 +6,7 @@ import Accordion from "./Accordion";
 
 const Transcript = () => {
 	return (
-		<div className="max-h-32">
+		<div className="">
 			<Accordion heading={"Video Transcript"}>
 				<h1>
 					[33] On the other hand, we denounce with righteous indignation and

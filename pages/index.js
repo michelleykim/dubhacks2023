@@ -43,7 +43,7 @@ export default function Home() {
 	};
 
 	return (
-		<div className={`App w-screen h-screen dark`}>
+		<div className={`App w-screen h-screen dark overflow-hidden`}>
 			<div
 				className="w-full h-full flex flex-row items-center text-black dark:text-white bg-white dark:bg-black"
 				id="main-content"
