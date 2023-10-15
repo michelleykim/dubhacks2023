@@ -1,13 +1,5 @@
 const initialState = {
 	qna: [
-		{
-			question: "What is the meaning of life?",
-			answer: "42",
-		},
-		{
-			question: "What is the meaning of food?",
-			answer: "to be eaten and enjoyed",
-		},
 	],
 	currentQuestion: "",
 	transcript: [],
@@ -24,7 +16,13 @@ const MainReducer = (state, action) => {
 		case "get_transcript": {
 			return {
 				...state,
-				transcript: action.payload,
+				transcript: action.payload.map((line) => {
+					return {
+						text: line.text,
+						duration: line.duration / 1000,
+						timestamp: line.offset / 1000,
+					}
+				}),
 			};
 		}
 		case "set_current_question": {

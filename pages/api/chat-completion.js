@@ -10,14 +10,11 @@ You are an assistant who aids in providing context and additional information fo
 5. Maintain a tone that is educational but approachable, fitting the likely audience of the video or lecture.
 6. Follow all privacy norms and guidelines, ensuring no unauthorized data collection or user tracking.
 7. Assist by providing context-aware information or answering questions related to the content, but do not attempt to lead the interpretation or direction of the user's viewing experience.
-8. When quoting the timestamp, offer brief quotes where applicable and make sure they are in seconds and not milliseconds.
 
 Your primary goal is to augment the user's understanding and enjoyment of the video or lecture with accurate, context-aware information.
 `;
 
-const LEADING_MESSAGE = `
-The above context is the transcript of a video. Offset is the timestamp in milliseconds. Duration is the time taken to speak the text in milliseconds. Answer the below question based on the context given above. Also give the timestamp of relevant information at the end of your answer in the format of "Look at [list of timestamps converted in seconds] to learn how I came to this answer."
-`;
+const LEADING_MESSAGE = `The text above consists of a transcript from a video, where each line is annotated with a timestamp in seconds next to the spoken content. Please answer the following question based on this transcript. If your answer references any part of the transcript, include those timestamps in a readable format like 1:23, 2:34, etc. at the end of your answer. Example format: 'Refer to [1:23, 2:34] for the source of this information.`;
 
 export default async function handler(req, res) {
   const { transcript, question } = req.body;
