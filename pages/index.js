@@ -6,6 +6,7 @@ import Transcript from "../src/frontend/Transcript";
 import Chat from "../src/frontend/Chat";
 import { MainReducer, initialState } from "../src/reducers/MainReducer";
 import { MainContext } from "../src/contexts/MainContext";
+import PromptInput from "../src/frontend/PromptInput";
 
 export default function Home() {
 	const [state, dispatch] = useReducer(MainReducer, initialState);
@@ -69,6 +70,8 @@ export default function Home() {
 					</div>
 					<div className="basis-1/2 mr-10 ml-5" id="right-panel">
 						<Chat />
+						<br />
+						<PromptInput />
 					</div>
 				</MainContext.Provider>
 			</div>
